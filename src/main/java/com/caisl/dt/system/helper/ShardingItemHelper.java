@@ -34,6 +34,9 @@ public class ShardingItemHelper {
 
     private static ShardingService shardingService;
 
+    /**
+     * 初始化调用的方法
+     */
     @PostConstruct
     public void init() {
         shardingService = new ShardingService(zookeeperRegistryCenter, delayTaskLoadConfig.getDelayTaskLoadJobName());
@@ -63,6 +66,9 @@ public class ShardingItemHelper {
 
     /**
      * 获取当前作业设置的分片ID集合
+     *
+     *  TODO
+     * 一个作业  ---------   N个节点作业实例
      *
      * @return
      */

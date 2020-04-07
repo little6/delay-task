@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * DelayTaskMessage
  *
+ * 延迟任务信息（任务id + 触发时间）
+ *
  * @author caisl
  * @since 2019-05-09
  */

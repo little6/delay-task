@@ -7,6 +7,8 @@ import java.util.concurrent.DelayQueue;
 /**
  * DelayTaskQueue
  *
+ * 自己实现的延迟队列
+ *
  * @author caisl
  * @since 2019-05-09
  */

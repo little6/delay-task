@@ -3,6 +3,8 @@ package com.caisl.dt.internal.sharding;
 /**
  * ShardingIdSelector
  *
+ * 分片id选择器接口
+ *
  * @author caisl
  * @since 2019-05-08
  */

@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * AddDelayTaskDTO
  *
+ * 添加定时任务DTO
+ *
  * @author caisl
  * @since 2019-05-08
  */

@@ -18,6 +18,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DelayTaskMessageProducer {
 
+    /**
+     * 将到期的延迟任务，根据任务的topic发送到对应的MQ的topic中
+     * @param delayTaskDO
+     * @return
+     */
     public String sendMsg(DelayTaskDO delayTaskDO) {
         String msgId = StringUtils.EMPTY;
         //TODO 具体消息生成由各公司自行封装的MQ框架实现

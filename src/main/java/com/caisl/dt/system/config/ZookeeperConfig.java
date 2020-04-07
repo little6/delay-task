@@ -8,15 +8,18 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * ZookeeperConfig
+ * 加载zookeeper配置，创建zookeeper配置中心
  *
  * @author caisl
  * @since 2019-04-24
  */
 @Configuration
 public class ZookeeperConfig {
+    //zk集群地址
     @Value("${zookeeper.serviceLists}")
     private String serviceLists;
 
+    //定时任务的命名空间(zk的一个目录)
     @Value("${zookeeper.namespace}")
     private String nameSpace;
 
@@ -31,6 +34,7 @@ public class ZookeeperConfig {
 
     /**
      * zookeeper 配置
+     * 创建zookeeper的注册中心，并调用初始化方法
      *
      * @return
      */

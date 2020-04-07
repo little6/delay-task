@@ -23,17 +23,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * DelayTaskTriggerManager
  *
+ * 处理延迟队列中任务的触发管理器(bean初始化后，开始从队列中取任务，开始执行)
+ *
  * @author caisl
  * @since 2019-05-14
  */
 @Component
 public class DelayTaskTriggerManager implements InitializingBean {
+    /**
+     * 自定义线程池
+     */
     final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(10, 20, 60, TimeUnit.SECONDS,
             new ArrayBlockingQueue<>(200),
             new DTThreadFactory(), new ThreadPoolExecutor.DiscardPolicy());
     @Resource
     private IDelayTaskHandler delayTaskHandler;
 
+    /**
+     * bean初始化后被调用的方法
+     */
     @Override
     public void afterPropertiesSet() {
         //延迟队列 任务消费线程加载，线程全部阻塞在take方法。不需要创建太多消费线程

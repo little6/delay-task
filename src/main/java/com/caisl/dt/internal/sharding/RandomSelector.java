@@ -13,6 +13,11 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @Component
 public class RandomSelector extends AbstractShardingIdSelector {
+    /**
+     * 自己实现分区ID选择算法（随机）
+     * @param shardingIds
+     * @return
+     */
     @Override
     protected Integer doSelect(List<Integer> shardingIds) {
         return ThreadLocalRandom.current().nextInt(shardingIds.size());

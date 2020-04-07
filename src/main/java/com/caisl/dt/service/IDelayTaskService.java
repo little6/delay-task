@@ -8,6 +8,8 @@ import javax.validation.Valid;
 /**
  * IDelayTaskService
  *
+ * 延迟任务服务接口
+ *
  * @author caisl
  * @since 2019-05-07
  */

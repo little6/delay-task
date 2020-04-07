@@ -22,6 +22,8 @@ import java.util.List;
 /**
  * DelayTaskHandler
  *
+ * 延迟任务处理器
+ *
  * @author caisl
  * @since 2019-05-09
  */
@@ -37,15 +39,22 @@ public class DelayTaskHandler implements IDelayTaskHandler {
      */
     private final static int MAX_TASK_LOOP_INDEX = 200;
 
+    //延迟队列(存放延迟任务)
     private final static DelayTaskQueue delayTaskQueue = DelayTaskQueue.INSTANCE;
 
     @Resource
     private ShardingItemHelper shardingItemHelper;
+    //延迟任务dao
     @Resource
     private DelayTaskDAO delayTaskDAO;
+    //延迟任务消息生产者：将延迟消息发送到MQ
     @Resource
     private DelayTaskMessageProducer delayTaskMessageProducer;
 
+    /**
+     * 加载任务(每5分钟执行一次)
+     * @return
+     */
     @Override
     public boolean loadTask() {
         //当前循环体的集合大小
@@ -67,6 +76,7 @@ public class DelayTaskHandler implements IDelayTaskHandler {
                     if (beginId < delayTaskDO.getDelayTaskId()) {
                         beginId = delayTaskDO.getDelayTaskId();
                     }
+                    //将延迟任务加入延迟队列中
                     delayTaskQueue.add(DelayTaskMessage.builder().delayTaskId(delayTaskDO.getDelayTaskId()).triggerTime(delayTaskDO.getTriggerTime()).build());
                     delayTaskDO.setStatus(DelayTaskStatusEnum.LOAD.getCode());
                     delayTaskDO.setOpTime(System.currentTimeMillis());
@@ -83,6 +93,11 @@ public class DelayTaskHandler implements IDelayTaskHandler {
         return true;
     }
 
+    /**
+     * 处理任务
+     * @param delayTaskMessage 延迟任务
+     * @return
+     */
     @Override
     public boolean dealTask(DelayTaskMessage delayTaskMessage) {
         //1.查询数据库中是否存在该任务
@@ -120,5 +135,6 @@ public class DelayTaskHandler implements IDelayTaskHandler {
                 .triggerTime(System.currentTimeMillis() + DelayTaskConstant.LOAD_JOB_TRIGGER_PERIOD)
                 .compensateTime(System.currentTimeMillis() - DelayTaskConstant.DELAY_TASK_COMPENSATE_TIME)
                 .shardingIds(shardingItemHelper.getLocalShardingIds()).build();
+        //TODO 注意这里的分片id
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * AbstractShardingIdSelector
+ * 抽象分片id选择器
  *
  * @author caisl
  * @since 2019-05-09
@@ -24,6 +25,7 @@ public abstract class AbstractShardingIdSelector implements ShardingIdSelector {
 
     @Override
     public Integer select(boolean isLocalNode) {
+        //获取分片id集合
         List<Integer> shardingIds = shardingItemHelper.getShardingIds(isLocalNode);
         if (CollectionUtils.isEmpty(shardingIds)) {
             return null;

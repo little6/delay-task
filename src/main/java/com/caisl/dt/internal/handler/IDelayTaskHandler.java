@@ -4,6 +4,7 @@ import com.caisl.dt.domain.DelayTaskMessage;
 
 /**
  * IDelayTaskHandler
+ * 延迟任务处理器接口
  *
  * @author caisl
  * @since 2019-05-09

@@ -84,7 +84,7 @@
             <version>1.16.18</version>
         </dependency>
 
-        <!-- convert -->
+        <!-- convert
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>toolkit.common</artifactId>
@@ -94,7 +94,7 @@
             <groupId>com.alibaba.toolkit</groupId>
             <artifactId>toolkit-common-convert</artifactId>
             <version>1.0</version>
-        </dependency>
+        </dependency> -->
 
         <!-- junit -->
         <dependency>

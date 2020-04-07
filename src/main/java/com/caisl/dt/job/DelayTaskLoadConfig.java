@@ -20,6 +20,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 public class DelayTaskLoadConfig {
+    //注册中心
     @Resource
     private ZookeeperRegistryCenter registryCenter;
 
@@ -27,23 +28,33 @@ public class DelayTaskLoadConfig {
         return delayTaskLoadJobName;
     }
 
+    //延迟任务名称
     @Value("${delayTaskLoadJob.name}")
     private String delayTaskLoadJobName;
 
+    //延迟任务cron表达式
     @Value("${delayTaskLoadJob.cron}")
     private String delayTaskLoadJobCron;
 
+    //延迟任务最大分片数
     @Value("${delayTaskLoadJob.shardingTotalCount}")
     private int delayTaskLoadJobShardingTotalCount;
 
     @Value("${delayTaskLoadJob.shardingItemParameters}")
     private String shardingItemParameters;
 
+    //创建任务调度bean并且调用init初始化方法
     @Bean(initMethod = "init")
     public JobScheduler delayTaskLoadJobScheduler(final DelayTaskLoadJob delayTaskLoadJob) {
+        /**
+         * delayTaskLoadJob 调度的任务
+         * registryCenter  注册中心
+         * liteJobConfiguration  配置信息
+         */
         return new SpringJobScheduler(delayTaskLoadJob, registryCenter, liteJobConfiguration());
     }
 
+    //定时调度的配置
     private LiteJobConfiguration liteJobConfiguration() {
         return LiteJobConfiguration.newBuilder(
                 new SimpleJobConfiguration(

@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * DTThreadFactory
+ * 线程池创建工厂(规定线程的名称 带编号)
  *
  * @author caisl
  * @since 2019-05-21
